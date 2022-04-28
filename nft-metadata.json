@@ -1,12 +1,9 @@
 {
   "attributes" : [ {
-    "trait_type" : "Pic",
-    "value" : "Test"
-  }, {
-    "trait_type" : "Pic 2",
-    "value" : "Test 2"
+    "trait_type" : "Category",
+    "value" : "Esports"
   } ],
-  "description" : "Sqncs test.",
-  "image" : "https://gateway.pinata.cloud/ipfs/QmTRw6q7PizFRmYG1tXqYywBRPMwtetc6dXVR5W32UF5dD",
-  "name" : "Sqncs rules 2"
+  "description" : "Sqncs test 5",
+  "image" : "https://gateway.pinata.cloud/ipfs/Qma2xkWaf94PLSifrQ1bLkczVRQ44iTCPJZDtk8g211w6c",
+  "name" : "esports 5"
 }

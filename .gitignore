@@ -1,3 +1,5 @@
 artifacts/@openzeppelin
+artifacts/build-info
 cache
 node_modules
+.env
