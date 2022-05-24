@@ -20,9 +20,10 @@ async function mintNFT(address) {
     'nonce': nonce,
     'gas': 500000,
     'maxPriorityFeePerGas': 2999999987,
-    'data': nftContract.methods.mintNFT(address).encodeABI()
+    'data': nftContract.methods.mintNFT(address).encodeABI(),
+    'value': 100
   };
-
+  console.log('tx', tx);
   const signedTx = await web3.eth.accounts.signTransaction(tx, PRIVATE_KEY);
   const transactionReceipt = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
 
