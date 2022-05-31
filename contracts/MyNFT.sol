@@ -13,13 +13,13 @@ contract MyNFT is ERC721, Ownable {
     uint public balanceReceived;
     string[] _tokenURIs = ["https://gateway.pinata.cloud/ipfs/QmX4Lt6n3XujaDD2L7aYSvCZwFnzf5CDMJReQspSs69qMR", "https://gateway.pinata.cloud/ipfs/QmdtNTzrTfcdCUaw9niZWLk1ZTcuZR46if29wyB2GkwfFP", "https://gateway.pinata.cloud/ipfs/QmainEiskW9YSWMc6kBBogNFjUi6wWbQEkDKqFNt2satcu", "https://gateway.pinata.cloud/ipfs/QmecSNmdPJU4rH82sr49QFo2hSqxzpSe42ytkwx87QiAJ5", "https://gateway.pinata.cloud/ipfs/QmcwvVujYJHeDLdbB9mn1rfe5gKsuGfcMpPgYkC38XvbJS"];
 
-    constructor() ERC721("SQNCS_NFT", "NFT") {}
+    constructor() ERC721("SQNCS_NFT_TEST", "NFT") {}
 
     // 1. Make smart contract accept new admin
     // 2. Smart contract will be deployed when given with list of tokenURI
-    
+
     // make owner to add admin access to other address
-    function mintNFT(address recipient)
+    function claimTo(address userWallet, uint256 quantity)
         public
         virtual
         payable
@@ -27,15 +27,27 @@ contract MyNFT is ERC721, Ownable {
     {
         // tokenIds will reach certain number and it will stop
         // require(_tokenIds <= _tokenURIs.length);
-        require(msg.value >= 10, "Not enough Polygon sent; check price!");
+        require(msg.value >= 0.01 * (10 ** 18), "Not enough Polygon sent; check price!");
         balanceReceived += msg.value;
 
         _tokenIds.increment();
         uint256 newItemId = _tokenIds.current();
-        _mint(recipient, newItemId);
+        _mint(userWallet, newItemId);
         _setTokenURI(newItemId, _tokenURIs[newItemId % 5]);
 
         return newItemId;        
+    }
+
+    function price() public view returns (uint256) {
+        return 0.01 * (10**18);
+    }
+
+    function getClaimIneligibilityReason(address userWallet, uint256 quantity) public view returns (string memory) {
+        return "";
+    }
+
+    function unclaimedSupply() public view returns (uint256) {
+        return 50 - _tokenIds.current();
     }
 
     function getBalance() public view returns(uint) {
